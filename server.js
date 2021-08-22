@@ -76,6 +76,7 @@ function viewAllEmployees() {
             startPrompt()
         })
 }
+
 function viewAllRoles() {
     connection.query("SELECT employee.first_name, employee.last_name, role.title AS Title FROM employee JOIN role ON employee.role_id = role.id",
         function (err, res) {
@@ -84,6 +85,7 @@ function viewAllRoles() {
             startPrompt
         })
 }
+
 function viewAllDepartments() {
     connection.query("SELECT employee.first_name, employee.last_name, department.name AS Department FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id ORDER BY employee.id;",
         function (err, res) {
@@ -91,4 +93,66 @@ function viewAllDepartments() {
             console.table(res)
             startPrompt
         })
+}
+
+const roleArray = [];
+function selectRole() {
+    connection.query("SELECT * FROM role", function (err, res) {
+        if (err) throw err
+        for (let i = 0; i < res.length; i++) {
+            roleArray.push(res[i].title);
+        }
+    })
+    return roleArray;
+}
+
+const managerArray = [];
+function slectManager() {
+    connection.query("SELECT first_name, last_name FROM employee WHERE manager_id IS NULL", function (err, res) {
+        if (err) throw err
+        for (let i = 0; i < res.length; i++) {
+            managerArray.push(res[i].first_name);
+        }
+    })
+    return managerArray;
+}
+
+function addEmployee() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            message: "Please enter new employee's first name.",
+            name: 'first_name'
+        },
+        {
+            type: 'input',
+            message: "Please enter new employee's last name.",
+            name: 'last_name'
+        },
+        {
+            type: 'list',
+            message: "Please select new employee's role.",
+            choices: selectRole(),
+            name: 'role'
+        },
+        {
+            type: 'rawlist',
+            message: "Please select new employee's manager",
+            choices: slectManager(),
+            name: 'manager'
+        }
+    ]).then(function (val) {
+        let roleId = selectRole().indexOf(val.role) + 1
+        let managerId = slectManager().indexOf(val.manager) + 1
+        connection.query('INSERT INTO emplyee SET ?', {
+            first_name: val.first_name,
+            last_name: val.last_name,
+            manager_id: managerId,
+            role_id: roleId
+        }, function (err) {
+            if (err) throw err
+            console.table(val)
+            startPrompt()
+        })
+    })
 }
