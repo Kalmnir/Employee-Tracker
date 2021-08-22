@@ -65,7 +65,7 @@ function startPrompt() {
                 break
 
             case 'Add department':
-
+                addDepartment()
                 break
 
             case 'Delete eployee':
@@ -240,4 +240,25 @@ function addRole() {
             )
         });
     });
+}
+
+function addDepartment() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            message: 'What is the name of the new Department?',
+            name: 'name'
+        }
+    ]).then(function (res) {
+        let query = connection.query('INSERT INTO department SET ?',
+            {
+                name: res.name
+            },
+            function (err, res) {
+                if (err) throw err
+                console.table(res);
+                startPrompt();
+            }
+        )
+    })
 }
