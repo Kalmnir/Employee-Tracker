@@ -53,7 +53,7 @@ function startPrompt() {
                 break
 
             case 'Update employee':
-
+                updateEmployee()
                 break
 
             case 'Add employee':
@@ -170,4 +170,45 @@ function addEmployee() {
             startPrompt()
         })
     })
+}
+
+function updateEmployee() {
+    connection.query("SELECT employee.last_name, role.title FROM employee JOIN role ON employee.role_id = role.id;", (err, res) => {
+        if (err) throw err
+        console.log(res)
+        inquirer.prompt([
+            {
+                type: 'rawlist',
+                message: "What is the employee's last name?",
+                choices: function () {
+                    let lastName = [];
+                    for (let i = 0; i < res.length; i++) {
+                        lastName.push(res[i].last_name);
+                    }
+                    return lastName;
+                },
+                name: 'last_name'
+            },
+            {
+                type: 'rawlist',
+                message: "What is the employee's new role?",
+                choices: selectRole(),
+                name: 'role'
+            },
+        ]).then(function (val) {
+            let roleId = selectRole().indexOf(val.role) + 1
+            connection.query('UPDATE employee SET WHERE ?',
+                {
+                    last_name: val.last_name
+                },
+                {
+                    role_is: roleId
+                },
+                function (err) {
+                    if (err) throw err
+                    console.table(val)
+                    startPrompt()
+                })
+        });
+    });
 }
