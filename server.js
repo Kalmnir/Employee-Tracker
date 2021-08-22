@@ -32,7 +32,10 @@ function startPrompt() {
                 'Update employee',
                 'Add employee',
                 'Add role',
-                'Add department'
+                'Add department',
+                'Delete employee',
+                'Delete Role',
+                'Delete department'
             ]
         }
     ]).then(function (val) {
@@ -42,11 +45,11 @@ function startPrompt() {
                 break;
 
             case 'View all employees by role':
-                viewAllRoles
+                viewAllRoles()
                 break;
 
             case 'View all employees by manager':
-                viewAllDepartments
+                viewAllDepartments()
                 break
 
             case 'Update employee':
@@ -54,7 +57,7 @@ function startPrompt() {
                 break
 
             case 'Add employee':
-
+                addEmployee()
                 break
 
             case 'Add Role':
@@ -62,6 +65,18 @@ function startPrompt() {
                 break
 
             case 'Add department':
+
+                break
+
+            case 'Delete eployee':
+
+                break
+
+            case 'Delete role':
+
+                break
+
+            case 'Delete department':
 
                 break
         }
