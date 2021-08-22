@@ -61,7 +61,7 @@ function startPrompt() {
                 break
 
             case 'Add Role':
-
+                addRole()
                 break
 
             case 'Add department':
@@ -209,6 +209,35 @@ function updateEmployee() {
                     console.table(val)
                     startPrompt()
                 })
+        });
+    });
+}
+
+function addRole() {
+    connection.query("SELECT role.title AS Title, role.salary AS Salary FROM role", function (err, res) {
+        inquirer.prompt([
+            {
+                type: 'input',
+                message: 'What is the title of the new role?',
+                name: 'Title'
+            },
+            {
+                type: 'input',
+                message: 'What is the salary of the new role?',
+                name: 'Salary'
+            }
+        ]).then(function (err, res) {
+            connection.query('INSERT INTO role SET ?',
+                {
+                    title: res.Title,
+                    salary: res.Salary,
+                },
+                function (err, res) {
+                    if (err) throw err
+                    console.table(res);
+                    startPrompt();
+                }
+            )
         });
     });
 }
