@@ -28,7 +28,7 @@ function startPrompt() {
             choices: [
                 'View all employees',
                 'View all employees by role',
-                'View all employees by manager',
+                'View all employees by department',
                 'Update employee',
                 'Add employee',
                 'Add role',
@@ -48,7 +48,7 @@ function startPrompt() {
                 viewAllRoles()
                 break;
 
-            case 'View all employees by manager':
+            case 'View all employees by department':
                 viewAllDepartments()
                 break
 
@@ -97,7 +97,7 @@ function viewAllRoles() {
         function (err, res) {
             if (err) throw err
             console.table(res)
-            startPrompt
+            startPrompt()
         })
 }
 
@@ -106,7 +106,7 @@ function viewAllDepartments() {
         function (err, res) {
             if (err) throw err
             console.table(res)
-            startPrompt
+            startPrompt()
         })
 }
 
