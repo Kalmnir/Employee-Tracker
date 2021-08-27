@@ -34,9 +34,9 @@ function startPrompt() {
                 'Add employee',
                 'Add role',
                 'Add department',
-                'Delete employee',
-                'Delete Role',
-                'Delete department'
+                // 'Delete employee',
+                // 'Delete Role',
+                // 'Delete department'
             ]
         }
     ]).then(function (val) {
