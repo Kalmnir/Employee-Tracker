@@ -32,7 +32,7 @@
   to test this application, see the above usage section.
   
 ## Contribution
-  To contribute to this project, Feel free to look through this code and make any improvements to it you wish.  There was a significant amount of implimintaion I was incapable of adding in the time I had, mostly, the delete functions.
+  To contribute to this project, Feel free to look through this code and make any improvements to it you wish.  There was a significant amount of implementation I was incapable of adding in the time I had, mostly, the delete functions.
   
 ## License
   This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
