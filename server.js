@@ -30,7 +30,7 @@ function startPrompt() {
                 'View all employees',
                 'View all employees by role',
                 'View all employees by department',
-                'Update employee',
+                'Update employee role',
                 'Add employee',
                 'Add role',
                 'Add department',
@@ -53,7 +53,7 @@ function startPrompt() {
                 viewAllDepartments()
                 break
 
-            case 'Update employee':
+            case 'Update employee role':
                 updateEmployee()
                 break
 
