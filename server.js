@@ -13,7 +13,7 @@ const connection = mysql.createConnection({
     database: 'employee_db'
 });
 
-// connect to the databse, give a nice little welcome message, and start the application
+// connect to the database, give a nice little welcome message, and start the application
 connection.connect((err) => {
     if (err) {
         console.log(err);
